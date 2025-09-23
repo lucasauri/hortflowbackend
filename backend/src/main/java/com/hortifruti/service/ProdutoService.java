@@ -1,11 +1,10 @@
 package com.hortifruti.service;
-import com.hortifruti.dao.ProdutoDAO;
 import com.hortifruti.model.Produto;
+import com.hortifruti.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,16 +22,16 @@ import java.util.Optional;
 @Transactional
 public class ProdutoService {
 
-    private final ProdutoDAO produtoDAO;
+    private final ProdutoRepository produtoRepository;
 
     /**
      * Construtor que recebe as dependências via injeção de dependência.
      * 
-     * @param produtoDAO DAO para operações de produtos
+     * @param produtoRepository Repository para operações de produtos
      */
     @Autowired
-    public ProdutoService(ProdutoDAO produtoDAO) {
-        this.produtoDAO = produtoDAO;
+    public ProdutoService(ProdutoRepository produtoRepository) {
+        this.produtoRepository = produtoRepository;
     }
 
     /**
@@ -41,12 +40,10 @@ public class ProdutoService {
      * @return Lista de todos os produtos
      * @throws RuntimeException Se houver erro na consulta
      */
+    @Transactional(readOnly = true)
     public List<Produto> buscarTodos() {
-        try {
-            return produtoDAO.buscarTodos();
-        } catch (SQLException e) {
-            throw new RuntimeException("Erro ao buscar produtos", e);
-        }
+        // Preferindo ordenação via JPA para manter consistência
+        return produtoRepository.findAllSortedByNome();
     }
 
     /**
@@ -56,12 +53,9 @@ public class ProdutoService {
      * @return Optional contendo o produto, se encontrado
      * @throws RuntimeException Se houver erro na consulta
      */
+    @Transactional(readOnly = true)
     public Optional<Produto> buscarPorId(Long id) {
-        try {
-            return produtoDAO.buscarPorId(id);
-        } catch (SQLException e) {
-            throw new RuntimeException("Erro ao buscar produto por ID: " + id, e);
-        }
+        return produtoRepository.findById(id);
     }
 
     /**
@@ -70,12 +64,9 @@ public class ProdutoService {
      * @return Lista de produtos com estoque baixo
      * @throws RuntimeException Se houver erro na consulta
      */
+    @Transactional(readOnly = true)
     public List<Produto> buscarComEstoqueBaixo() {
-        try {
-            return produtoDAO.buscarComEstoqueBaixo();
-        } catch (SQLException e) {
-            throw new RuntimeException("Erro ao buscar produtos com estoque baixo", e);
-        }
+        return produtoRepository.findComEstoqueBaixo();
     }
 
     /**
@@ -88,12 +79,11 @@ public class ProdutoService {
      */
     public Produto criar(Produto produto) {
         validarProduto(produto);
-        
-        try {
-            return produtoDAO.inserir(produto);
-        } catch (SQLException e) {
-            throw new RuntimeException("Erro ao criar produto", e);
-        }
+        // Zera campos de controle, se vierem nulos
+        if (produto.getEstoqueInicial() == null) produto.setEstoqueInicial(0.0);
+        if (produto.getEntradas() == null) produto.setEntradas(0.0);
+        if (produto.getSaidas() == null) produto.setSaidas(0.0);
+        return produtoRepository.save(produto);
     }
 
     /**
@@ -106,20 +96,16 @@ public class ProdutoService {
      */
     public Optional<Produto> atualizar(Produto produto) {
         validarProduto(produto);
-        
+
         if (produto.getId() == null) {
             throw new IllegalArgumentException("ID do produto é obrigatório para atualização");
         }
-        
-        try {
-            boolean atualizado = produtoDAO.atualizar(produto);
-            if (atualizado) {
-                return produtoDAO.buscarPorId(produto.getId());
-            }
+
+        if (!produtoRepository.existsById(produto.getId())) {
             return Optional.empty();
-        } catch (SQLException e) {
-            throw new RuntimeException("Erro ao atualizar produto", e);
         }
+        Produto atualizado = produtoRepository.save(produto);
+        return Optional.of(atualizado);
     }
 
     /**
@@ -133,12 +119,9 @@ public class ProdutoService {
         if (id == null) {
             throw new IllegalArgumentException("ID do produto é obrigatório para remoção");
         }
-        
-        try {
-            return produtoDAO.remover(id);
-        } catch (SQLException e) {
-            throw new RuntimeException("Erro ao remover produto", e);
-        }
+        if (!produtoRepository.existsById(id)) return false;
+        produtoRepository.deleteById(id);
+        return true;
     }
 
     /**
@@ -154,48 +137,37 @@ public class ProdutoService {
         if (produtoId == null) {
             throw new IllegalArgumentException("ID do produto é obrigatório");
         }
-        
+
         if (tipo == null || tipo.trim().isEmpty()) {
             throw new IllegalArgumentException("Tipo da movimentação é obrigatório");
         }
-        
+
         if (!"ENTRADA".equals(tipo) && !"SAIDA".equals(tipo)) {
             throw new IllegalArgumentException("Tipo deve ser ENTRADA ou SAIDA");
         }
-        
+
         if (quantidade == null || quantidade <= 0) {
             throw new IllegalArgumentException("Quantidade deve ser maior que zero");
         }
-        
-        try {
-            // Verificar se o produto existe
-            Optional<Produto> produtoOpt = produtoDAO.buscarPorId(produtoId);
-            if (produtoOpt.isEmpty()) {
-                throw new IllegalArgumentException("Produto não encontrado");
-            }
-            
-            // Verificar se há estoque suficiente para saída
-            if ("SAIDA".equals(tipo)) {
-                Produto produto = produtoOpt.get();
-                if (produto.getEstoqueAtual() < quantidade) {
-                    throw new IllegalArgumentException("Estoque insuficiente para a saída");
-                }
-            }
-            
-            // Atualizar o estoque
-            boolean sucesso;
-            if ("ENTRADA".equals(tipo)) {
-                sucesso = produtoDAO.adicionarEntrada(produtoId, quantidade);
-            } else {
-                sucesso = produtoDAO.adicionarSaida(produtoId, quantidade);
-            }
-            
-            if (!sucesso) {
-                throw new RuntimeException("Falha ao registrar movimentação de estoque");
-            }
-            
-        } catch (SQLException e) {
-            throw new RuntimeException("Erro ao adicionar movimentação de estoque", e);
+
+        // Verificar se o produto existe
+        Produto produto = produtoRepository.findById(produtoId)
+                .orElseThrow(() -> new IllegalArgumentException("Produto não encontrado"));
+
+        // Verificar se há estoque suficiente para saída
+        if ("SAIDA".equals(tipo) && produto.getEstoqueAtual() < quantidade) {
+            throw new IllegalArgumentException("Estoque insuficiente para a saída");
+        }
+
+        // Atualizar o estoque via queries nativas para evitar condições de corrida simples
+        int rows;
+        if ("ENTRADA".equals(tipo)) {
+            rows = produtoRepository.incrementarEntrada(produtoId, quantidade);
+        } else {
+            rows = produtoRepository.incrementarSaida(produtoId, quantidade);
+        }
+        if (rows == 0) {
+            throw new RuntimeException("Falha ao registrar movimentação de estoque");
         }
     }
 
@@ -205,35 +177,32 @@ public class ProdutoService {
      * @return Map com as estatísticas
      * @throws RuntimeException Se houver erro na consulta
      */
+    @Transactional(readOnly = true)
     public Map<String, Object> obterEstatisticas() {
-        try {
-            double[] stats = produtoDAO.obterEstatisticas();
-            
-            Map<String, Object> estatisticas = new HashMap<>();
-            estatisticas.put("totalEstoqueInicial", stats[0]);
-            estatisticas.put("totalEntradas", stats[1]);
-            estatisticas.put("totalSaidas", stats[2]);
-            estatisticas.put("totalEstoqueAtual", stats[3]);
-            estatisticas.put("totalProdutos", (int) stats[4]);
-            
-            // Calcular valor total em estoque
-            List<Produto> produtos = produtoDAO.buscarTodos();
-            double valorTotalEstoque = produtos.stream()
-                    .mapToDouble(Produto::getValorEstoque)
-                    .sum();
-            estatisticas.put("valorTotalEstoque", valorTotalEstoque);
-            
-            // Contar produtos com estoque baixo
-            long produtosComEstoqueBaixo = produtos.stream()
-                    .filter(Produto::isEstoqueBaixo)
-                    .count();
-            estatisticas.put("produtosComEstoqueBaixo", produtosComEstoqueBaixo);
-            
-            return estatisticas;
-            
-        } catch (SQLException e) {
-            throw new RuntimeException("Erro ao obter estatísticas", e);
-        }
+        List<Produto> produtos = produtoRepository.findAll();
+
+        double totalEstoqueInicial = produtos.stream().map(Produto::getEstoqueInicial).filter(v -> v != null).mapToDouble(Double::doubleValue).sum();
+        double totalEntradas = produtos.stream().map(Produto::getEntradas).filter(v -> v != null).mapToDouble(Double::doubleValue).sum();
+        double totalSaidas = produtos.stream().map(Produto::getSaidas).filter(v -> v != null).mapToDouble(Double::doubleValue).sum();
+        double totalEstoqueAtual = produtos.stream().mapToDouble(p -> p.getEstoqueAtual()).sum();
+        int totalProdutos = produtos.size();
+
+        double valorTotalEstoque = produtos.stream()
+                .mapToDouble(Produto::getValorEstoque)
+                .sum();
+        long produtosComEstoqueBaixo = produtos.stream()
+                .filter(Produto::isEstoqueBaixo)
+                .count();
+
+        Map<String, Object> estatisticas = new HashMap<>();
+        estatisticas.put("totalEstoqueInicial", totalEstoqueInicial);
+        estatisticas.put("totalEntradas", totalEntradas);
+        estatisticas.put("totalSaidas", totalSaidas);
+        estatisticas.put("totalEstoqueAtual", totalEstoqueAtual);
+        estatisticas.put("totalProdutos", totalProdutos);
+        estatisticas.put("valorTotalEstoque", valorTotalEstoque);
+        estatisticas.put("produtosComEstoqueBaixo", produtosComEstoqueBaixo);
+        return estatisticas;
     }
 
     /**

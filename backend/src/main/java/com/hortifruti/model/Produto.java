@@ -1,34 +1,49 @@
 package com.hortifruti.model;
 
+import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
+
 /**
  * Classe que representa um produto no sistema Hortifruti.
- * Implementa encapsulamento através de atributos privados e métodos públicos.
- * 
- * @author Hortifruti Team
- * @version 1.0
- * @since 2024-01-01
+ * Agora mapeada como entidade JPA.
  */
+@Entity
+@Table(name = "produtos")
 public class Produto {
     
     /** Identificador único do produto */
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
     /** Nome do produto */
+    @NotBlank(message = "Nome do produto é obrigatório")
+    @Column(name = "nome", nullable = false)
     private String nome;
     
     /** Preço unitário do produto */
+    @NotNull(message = "Preço é obrigatório")
+    @Positive(message = "Preço deve ser maior que zero")
+    @Column(name = "preco", nullable = false)
     private Double preco;
     
     /** Tipo de embalagem do produto */
+    @Column(name = "embalagem")
     private String embalagem;
     
     /** Quantidade inicial em estoque */
+    @PositiveOrZero(message = "Estoque inicial não pode ser negativo")
+    @Column(name = "estoque_inicial")
     private Double estoqueInicial;
     
     /** Total de entradas no estoque */
+    @PositiveOrZero(message = "Entradas não podem ser negativas")
+    @Column(name = "entradas")
     private Double entradas;
     
     /** Total de saídas do estoque */
+    @PositiveOrZero(message = "Saídas não podem ser negativas")
+    @Column(name = "saidas")
     private Double saidas;
     
     /**
@@ -83,7 +98,10 @@ public class Produto {
      * @return Quantidade atual em estoque
      */
     public Double getEstoqueAtual() {
-        return estoqueInicial + entradas - saidas;
+        double estoqueInicialVal = estoqueInicial != null ? estoqueInicial : 0.0;
+        double entradasVal = entradas != null ? entradas : 0.0;
+        double saidasVal = saidas != null ? saidas : 0.0;
+        return estoqueInicialVal + entradasVal - saidasVal;
     }
     
     /**
@@ -101,6 +119,7 @@ public class Produto {
      * @return Valor total do estoque atual
      */
     public Double getValorEstoque() {
+        if (preco == null) return 0.0;
         return getEstoqueAtual() * preco;
     }
     

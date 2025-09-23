@@ -23,7 +23,7 @@ public class HortifrutiApplication {
         System.out.println("🚀 Iniciando Sistema HortiFlow...");
         SpringApplication.run(HortifrutiApplication.class, args);
         System.out.println("✅ Sistema HortiFlow iniciado com sucesso!");
-        System.out.println("📊 API disponível em: http://localhost:8080");
-        System.out.println("🔍 Swagger UI: http://localhost:8080/swagger-ui.html");
+        System.out.println("📊 API base: http://localhost:8080/api");
+        System.out.println("🔍 Swagger UI: http://localhost:8080/api/swagger-ui/index.html");
     }
 } 

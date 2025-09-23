@@ -4,6 +4,6 @@ com\hortifruti\dao\DatabaseConnection.class
 com\hortifruti\model\MovimentacaoEstoque.class
 com\hortifruti\model\Produto.class
 com\hortifruti\service\ProdutoService.class
-com\hortifruti\HortifrutiApplication.class
 com\hortifruti\model\Cliente.class
+com\hortifruti\HortifrutiApplication.class
 com\hortifruti\dao\ProdutoDAO.class

@@ -1,37 +1,48 @@
 package com.hortifruti.model;
 
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+
 /**
  * Classe que representa um cliente no sistema Hortifruti.
- * Implementa encapsulamento através de atributos privados e métodos públicos.
- * 
- * @author Hortifruti Team
- * @version 1.0
- * @since 2024-01-01
+ * Agora mapeada como entidade JPA.
  */
+@Entity
+@Table(name = "clientes")
 public class Cliente {
     
     /** Identificador único do cliente */
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
     /** Nome do cliente */
+    @NotBlank(message = "Nome do cliente é obrigatório")
+    @Column(name = "nome", nullable = false)
     private String nome;
     
     /** Estado do cliente */
+    @Column(name = "estado")
     private String estado;
     
     /** Telefone do cliente */
+    @Column(name = "telefone")
     private String telefone;
     
     /** CNPJ do cliente */
+    @Column(name = "cnpj")
     private String cnpj;
     
     /** Inscrição Estadual do cliente */
+    @Column(name = "ie")
     private String ie;
     
     /** Condição de pagamento */
+    @Column(name = "cond_pgto")
     private String condPgto;
     
     /** Banco do cliente */
+    @Column(name = "banco")
     private String banco;
     
     /**

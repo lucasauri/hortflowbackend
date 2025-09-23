@@ -1,6 +1,5 @@
 package com.hortifruti.dao;
 
-import org.springframework.stereotype.Component;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -14,7 +13,7 @@ import java.sql.Statement;
  * @version 1.0
  * @since 2024-01-01
  */
-@Component
+// LEGADO DESATIVADO: não utilizado após migração para JPA/PostgreSQL
 public class DatabaseConnection {
     
     private static final String DB_URL = "jdbc:sqlite:hortiflow.db";

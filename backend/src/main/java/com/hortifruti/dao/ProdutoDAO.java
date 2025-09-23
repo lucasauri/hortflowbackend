@@ -1,7 +1,6 @@
 package com.hortifruti.dao;
 
 import com.hortifruti.model.Produto;
-import org.springframework.stereotype.Repository;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +14,7 @@ import java.util.Optional;
  * @version 1.0
  * @since 2024-01-01
  */
-@Repository
+// LEGADO DESATIVADO: não utilizado após migração para JPA/PostgreSQL
 public class ProdutoDAO {
     
     private final DatabaseConnection connection;

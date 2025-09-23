@@ -39,7 +39,7 @@ echo    SERVIDOR INICIADO COM SUCESSO!
 echo ========================================
 echo.
 echo API disponivel em: http://localhost:8080/api
-echo Swagger UI: http://localhost:8080/swagger-ui.html
+echo Swagger UI: http://localhost:8080/api/swagger-ui/index.html
 echo Health Check: http://localhost:8080/api/produtos/health
 echo.
 echo Pressione Ctrl+C para parar o servidor
