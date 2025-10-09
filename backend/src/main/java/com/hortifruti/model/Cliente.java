@@ -2,6 +2,7 @@ package com.hortifruti.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import org.hibernate.validator.constraints.br.CPF;
 
 /**
  * Classe que representa um cliente no sistema Hortifruti.
@@ -20,6 +21,12 @@ public class Cliente {
     @NotBlank(message = "Nome do cliente é obrigatório")
     @Column(name = "nome", nullable = false)
     private String nome;
+    
+    /** CPF do cliente */
+    @NotBlank(message = "CPF é obrigatório")
+    @CPF(message = "CPF inválido")
+    @Column(name = "cpf", unique = true, nullable = false, length = 14)
+    private String cpf;
     
     /** Estado do cliente */
     @Column(name = "estado")
@@ -243,6 +250,24 @@ public class Cliente {
      */
     public String getBanco() {
         return banco;
+    }
+    
+    /**
+     * Obtém o CPF do cliente.
+     * 
+     * @return CPF do cliente
+     */
+    public String getCpf() {
+        return cpf;
+    }
+
+    /**
+     * Define o CPF do cliente.
+     * 
+     * @param cpf CPF do cliente
+     */
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
     
     /**

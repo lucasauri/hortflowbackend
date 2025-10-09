@@ -58,7 +58,7 @@ Endpoints e documentação:
 - Dashboard com estatísticas de estoque e produtos
 - CRUD de Clientes (listar, criar, editar, excluir)
 - Swagger UI para documentação e teste da API
-- Frontend SPA simples com toasts, loading overlay, filtros e buscas
+-
 
 ---
 
@@ -84,12 +84,6 @@ ProjetoHortiflow/
 │  ├─ src/main/resources/
 │  │  └─ application.properties
 │  └─ run.bat
-└─ frontend/
-   ├─ index.html
-   ├─ app.js
-   ├─ styles.css
-   └─ start-frontend.bat
-```
 
 ---
 
