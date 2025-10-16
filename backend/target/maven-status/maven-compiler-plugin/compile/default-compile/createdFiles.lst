@@ -2,8 +2,12 @@ com\hortifruti\config\DatabaseConfig.class
 com\hortifruti\controller\ProdutoController.class
 com\hortifruti\dao\DatabaseConnection.class
 com\hortifruti\model\MovimentacaoEstoque.class
+com\hortifruti\repository\ProdutoRepository.class
 com\hortifruti\model\Produto.class
 com\hortifruti\service\ProdutoService.class
 com\hortifruti\model\Cliente.class
+com\hortifruti\repository\ClienteRepository.class
+com\hortifruti\service\ClienteService.class
 com\hortifruti\HortifrutiApplication.class
 com\hortifruti\dao\ProdutoDAO.class
+com\hortifruti\controller\ClienteController.class
