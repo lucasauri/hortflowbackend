@@ -2,7 +2,6 @@ package com.hortifruti.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import org.hibernate.validator.constraints.br.CPF;
 
 /**
  * Classe que representa um cliente no sistema Hortifruti.
@@ -24,7 +23,6 @@ public class Cliente {
     
     /** CPF do cliente */
     @NotBlank(message = "CPF é obrigatório")
-    @CPF(message = "CPF inválido")
     @Column(name = "cpf", unique = true, nullable = false, length = 14)
     private String cpf;
     

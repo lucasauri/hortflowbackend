@@ -79,11 +79,38 @@ public class ProdutoService {
      */
     public Produto criar(Produto produto) {
         validarProduto(produto);
+        
+        // Garante que o ID seja null para criação (não atualização)
+        // Se vier como 0 ou qualquer outro valor, força para null
+        if (produto.getId() == null || produto.getId() == 0) {
+            produto.setId(null);
+        } else {
+            // Se tem ID não-nulo, é uma tentativa de atualização, não permitir
+            throw new IllegalArgumentException("ID não deve ser fornecido para criação de novo produto");
+        }
+        
         // Zera campos de controle, se vierem nulos
         if (produto.getEstoqueInicial() == null) produto.setEstoqueInicial(0.0);
         if (produto.getEntradas() == null) produto.setEntradas(0.0);
         if (produto.getSaidas() == null) produto.setSaidas(0.0);
-        return produtoRepository.save(produto);
+        
+        // Garante que embalagem tenha valor padrão se estiver vazia ou nula
+        if (produto.getEmbalagem() == null || produto.getEmbalagem().trim().isEmpty()) {
+            produto.setEmbalagem("Band. 200m");
+        }
+        
+        try {
+            return produtoRepository.save(produto);
+        } catch (Exception e) {
+            // Log detalhado do erro antes de relançar
+            System.err.println("Erro ao salvar produto:");
+            System.err.println("ID: " + produto.getId());
+            System.err.println("Nome: " + produto.getNome());
+            System.err.println("Preço: " + produto.getPreco());
+            System.err.println("Estoque Inicial: " + produto.getEstoqueInicial());
+            System.err.println("Embalagem: " + produto.getEmbalagem());
+            throw new RuntimeException("Erro ao salvar produto no banco de dados: " + e.getMessage(), e);
+        }
     }
 
     /**

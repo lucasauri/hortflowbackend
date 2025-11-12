@@ -1,6 +1,7 @@
 package com.hortifruti.model;
 
 import java.time.LocalDateTime;
+import jakarta.persistence.*;
 
 /**
  * Classe que representa uma movimentação de estoque no sistema Hortifruti.
@@ -10,21 +11,30 @@ import java.time.LocalDateTime;
  * @version 1.0
  * @since 2024-01-01
  */
+@Entity
+@Table(name = "movimentacoes_estoque")
 public class MovimentacaoEstoque {
     
     /** Identificador único da movimentação */
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
     
     /** Produto relacionado à movimentação */
+    @Column(name = "produto_id", nullable = false)
     private Long produtoId;
     
     /** Tipo da movimentação (ENTRADA, SAIDA, INICIAL) */
+    @Column(name = "tipo", nullable = false, length = 20)
     private String tipo;
     
     /** Quantidade movimentada */
+    @Column(name = "quantidade", nullable = false)
     private Double quantidade;
     
     /** Data e hora da movimentação */
+    @Column(name = "data", nullable = false)
     private LocalDateTime data;
     
     /**
@@ -219,4 +229,4 @@ public class MovimentacaoEstoque {
     public int hashCode() {
         return id != null ? id.hashCode() : 0;
     }
-} 
+}

@@ -32,7 +32,27 @@ public class ClienteService {
 
     public Cliente criar(Cliente cliente) {
         validarCliente(cliente);
-        return clienteRepository.save(cliente);
+        
+        // Garante que o ID seja null para criação (não atualização)
+        // Se vier como 0 ou qualquer outro valor, força para null
+        if (cliente.getId() == null || cliente.getId() == 0) {
+            cliente.setId(null);
+        } else {
+            // Se tem ID não-nulo, é uma tentativa de atualização, não permitir
+            throw new IllegalArgumentException("ID não deve ser fornecido para criação de novo cliente");
+        }
+        
+        try {
+            return clienteRepository.save(cliente);
+        } catch (Exception e) {
+            // Log detalhado do erro antes de relançar
+            System.err.println("Erro ao salvar cliente:");
+            System.err.println("ID: " + cliente.getId());
+            System.err.println("Nome: " + cliente.getNome());
+            System.err.println("CPF: " + cliente.getCpf());
+            System.err.println("Estado: " + cliente.getEstado());
+            throw new RuntimeException("Erro ao salvar cliente no banco de dados: " + e.getMessage(), e);
+        }
     }
 
     public Optional<Cliente> atualizar(Long id, Cliente cliente) {
