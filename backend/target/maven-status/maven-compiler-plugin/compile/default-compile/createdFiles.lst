@@ -1,4 +1,3 @@
-com\hortifruti\config\DatabaseConfig.class
 com\hortifruti\service\VendaService.class
 com\hortifruti\controller\GlobalExceptionHandler.class
 com\hortifruti\dto\MovimentacaoRequest.class
@@ -8,6 +7,7 @@ com\hortifruti\service\ProdutoService.class
 com\hortifruti\model\TipoMovimentacao.class
 com\hortifruti\repository\VendaRepository.class
 com\hortifruti\service\PdfService.class
+com\hortifruti\config\SecurityConfig.class
 com\hortifruti\model\Venda.class
 com\hortifruti\model\Venda$StatusVenda.class
 com\hortifruti\service\ClienteService.class
@@ -18,10 +18,13 @@ com\hortifruti\model\MovimentacaoEstoque.class
 com\hortifruti\model\Produto.class
 com\hortifruti\model\Cliente.class
 com\hortifruti\controller\DashboardController.class
+com\hortifruti\service\AuthService.class
 com\hortifruti\config\SwaggerConfig.class
 com\hortifruti\repository\ClienteRepository.class
+com\hortifruti\dto\LoginRequest.class
 com\hortifruti\model\ItemVenda.class
 com\hortifruti\repository\ItemVendaRepository.class
 com\hortifruti\HortifrutiApplication.class
-com\hortifruti\security\SecurityConfig.class
+com\hortifruti\dto\LoginResponse.class
+com\hortifruti\controller\AuthController.class
 com\hortifruti\controller\ClienteController.class

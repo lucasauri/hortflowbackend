@@ -19,9 +19,6 @@ public class VendaService {
     private VendaRepository vendaRepository;
     
     @Autowired
-    private ItemVendaRepository itemVendaRepository;
-    
-    @Autowired
     private ClienteRepository clienteRepository;
     
     @Autowired

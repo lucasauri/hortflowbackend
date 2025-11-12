@@ -42,7 +42,7 @@ public class Venda {
     @Column(nullable = true, length = 500)
     private String observacoes;
     
-    @Column(nullable = false, unique = true)
+    @Column(nullable = true, unique = true)
     private String numeroVenda;
     
     public Venda() {
