@@ -3,6 +3,8 @@ package com.hortifruti.controller;
 import com.hortifruti.model.Venda;
 import com.hortifruti.service.VendaService;
 import com.hortifruti.service.PdfService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
@@ -15,9 +17,20 @@ import java.io.ByteArrayInputStream;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Controller REST para gerenciamento de vendas.
+ * 
+ * <p>Fornece endpoints para criar, finalizar, cancelar e consultar vendas,
+ * além de gerar PDFs de recibos de venda.
+ * 
+ * @author Hortifruti Team
+ * @version 1.0
+ * @since 2024-01-01
+ */
 @RestController
 @RequestMapping("/vendas")
 @CrossOrigin(origins = "*")
+@Tag(name = "Vendas", description = "API para gerenciamento de vendas")
 public class VendaController {
     
     @Autowired
@@ -26,6 +39,13 @@ public class VendaController {
     @Autowired
     private PdfService pdfService;
     
+    /**
+     * Cria uma nova venda.
+     * 
+     * @param venda Dados da venda a ser criada
+     * @return Venda criada ou mensagem de erro
+     */
+    @Operation(summary = "Criar nova venda", description = "Cria uma nova venda com status PENDENTE. Atualiza o estoque dos produtos automaticamente.")
     @PostMapping
     public ResponseEntity<?> criarVenda(@RequestBody Venda venda) {
         try {

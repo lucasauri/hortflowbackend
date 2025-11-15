@@ -2,6 +2,7 @@ package com.hortifruti.controller;
 
 import com.hortifruti.model.Cliente;
 import com.hortifruti.service.ClienteService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,9 +11,20 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * Controller REST para gerenciamento de clientes.
+ * 
+ * <p>Fornece endpoints para CRUD completo de clientes, incluindo
+ * validação de dados e tratamento de erros.
+ * 
+ * @author Hortifruti Team
+ * @version 1.0
+ * @since 2024-01-01
+ */
 @RestController
 @RequestMapping("/clientes")
 @CrossOrigin(origins = "*")
+@Tag(name = "Clientes", description = "API para gerenciamento de clientes")
 public class ClienteController {
 
     private final ClienteService clienteService;

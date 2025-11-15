@@ -5,7 +5,14 @@ import jakarta.validation.constraints.*;
 
 /**
  * Classe que representa um produto no sistema Hortifruti.
- * Agora mapeada como entidade JPA.
+ * 
+ * <p>Um produto contém informações sobre nome, preço, embalagem e controle de estoque.
+ * O sistema gerencia automaticamente o estoque através de entradas e saídas, calculando
+ * o estoque atual dinamicamente.
+ * 
+ * @author Hortifruti Team
+ * @version 1.0
+ * @since 2024-01-01
  */
 @Entity
 @Table(name = "produtos")
