@@ -4,4 +4,5 @@ com.hortifruti.controller
 com.hortifruti.dto
 com.hortifruti.model
 com.hortifruti.repository
+com.hortifruti.security
 com.hortifruti.service

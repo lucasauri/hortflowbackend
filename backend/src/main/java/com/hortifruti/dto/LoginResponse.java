@@ -3,14 +3,18 @@ package com.hortifruti.dto;
 public class LoginResponse {
     private boolean success;
     private String message;
-    private String token;
+    private String accessToken;
+    private String refreshToken;
+    private UserDto user;
 
     public LoginResponse() {}
 
-    public LoginResponse(boolean success, String message, String token) {
+    public LoginResponse(boolean success, String message, String accessToken, String refreshToken, UserDto user) {
         this.success = success;
         this.message = message;
-        this.token = token;
+        this.accessToken = accessToken;
+        this.refreshToken = refreshToken;
+        this.user = user;
     }
 
     public boolean isSuccess() {
@@ -29,11 +33,22 @@ public class LoginResponse {
         this.message = message;
     }
 
-    public String getToken() {
-        return token;
+    public String getAccessToken() { 
+        return accessToken; 
     }
-
-    public void setToken(String token) {
-        this.token = token;
+    public void setAccessToken(String accessToken) { 
+        this.accessToken = accessToken; 
+    }
+    public String getRefreshToken() { 
+        return refreshToken; 
+    }
+    public void setRefreshToken(String refreshToken) { 
+        this.refreshToken = refreshToken; 
+    }
+    public UserDto getUser() { 
+        return user; 
+    }
+    public void setUser(UserDto user) { 
+        this.user = user; 
     }
 }
