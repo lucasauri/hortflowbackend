@@ -17,9 +17,17 @@ import java.io.ByteArrayOutputStream;
 import java.math.BigDecimal;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Serviço para geração de PDFs.
+ */
 @Service
 public class PdfService {
-    
+
+    /**
+     * Gera um PDF de recibo de venda.
+     * @param venda A venda para a qual o recibo será gerado.
+     * @return Um ByteArrayInputStream contendo o PDF gerado.
+     */
     public ByteArrayInputStream gerarPdfVenda(Venda venda) {
         try {
             ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -71,6 +79,22 @@ public class PdfService {
             
             infoTable.addCell(createCell("Telefone:").setBold());
             infoTable.addCell(createCell(venda.getCliente().getTelefone()));
+
+            // Endereço do Cliente/Entrega
+            infoTable.addCell(createCell("Endereço de Entrega:").setBold());
+            String enderecoTexto = "Não informado";
+            if (venda.getEnderecoEntrega() != null) {
+                String complemento = venda.getEnderecoEntrega().getComplemento() != null ? 
+                        (", " + venda.getEnderecoEntrega().getComplemento()) : "";
+                enderecoTexto = String.format("%s, %s%s - %s, %s - CEP %s",
+                        venda.getEnderecoEntrega().getRua(),
+                        venda.getEnderecoEntrega().getNumero(),
+                        complemento,
+                        venda.getEnderecoEntrega().getBairro(),
+                        venda.getEnderecoEntrega().getCidade() + "/" + venda.getEnderecoEntrega().getEstado(),
+                        venda.getEnderecoEntrega().getCep());
+            }
+            infoTable.addCell(createCell(enderecoTexto));
             
             infoTable.addCell(createCell("Status:").setBold());
             infoTable.addCell(createCell(venda.getStatus().toString()));
@@ -152,12 +176,22 @@ public class PdfService {
             throw new RuntimeException("Erro ao gerar PDF da venda", e);
         }
     }
-    
+
+    /**
+     * Cria uma célula de tabela padrão.
+     * @param content O conteúdo da célula.
+     * @return A célula criada.
+     */
     private Cell createCell(String content) {
         return new Cell().add(new Paragraph(content))
                 .setPadding(5);
     }
-    
+
+    /**
+     * Cria uma célula de cabeçalho de tabela.
+     * @param content O conteúdo da célula.
+     * @return A célula de cabeçalho criada.
+     */
     private Cell createHeaderCell(String content) {
         return new Cell().add(new Paragraph(content))
                 .setBold()

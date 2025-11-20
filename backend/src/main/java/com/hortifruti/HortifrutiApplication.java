@@ -2,6 +2,7 @@ package com.hortifruti;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
 
 /**
  * Classe principal da aplicação Hortifruti.
@@ -12,7 +13,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @since 2024-01-01
  */
 @SpringBootApplication
+@ComponentScan(basePackages = {"com.hortifruti"})
 public class HortifrutiApplication {
+
 
     /**
      * Método principal que inicia a aplicação Spring Boot.
@@ -26,4 +29,4 @@ public class HortifrutiApplication {
         System.out.println("📊 API base: http://localhost:8080/api");
         System.out.println("🔍 Swagger UI: http://localhost:8080/api/swagger-ui/index.html");
     }
-} 
+}

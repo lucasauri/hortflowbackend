@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 import java.time.Instant;
 import java.util.UUID;
 
+/**
+ * Entidade que representa um usuário.
+ */
 @Entity
 @Table(name = "users")
 public class User {
@@ -32,6 +35,9 @@ public class User {
     @Column(name = "updated_at", nullable = false)
     private Instant updatedAt;
 
+    /**
+     * Define o ID e as datas de criação e atualização antes da persistência.
+     */
     @PrePersist
     public void prePersist() {
         if (id == null) {
@@ -42,6 +48,9 @@ public class User {
         this.updatedAt = now;
     }
 
+    /**
+     * Define a data de atualização antes da atualização.
+     */
     @PreUpdate
     public void preUpdate() {
         this.updatedAt = Instant.now();

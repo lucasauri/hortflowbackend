@@ -39,6 +39,10 @@ public class ItemVenda {
     
     @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal subtotal;
+
+    // Compatibilidade com esquema atual do banco (coluna NOT NULL total_item)
+    @Column(name = "total_item", nullable = false, precision = 10, scale = 2)
+    private BigDecimal totalItem;
     
     /**
      * Construtor padrão da classe ItemVenda.
@@ -134,40 +138,46 @@ public class ItemVenda {
     public void setQuantidade(Double quantidade) {
         this.quantidade = quantidade;
     }
-    
+
     /**
-     * Obtém o preço unitário do produto no momento da venda.
-     * 
-     * @return Preço unitário
+     * Obtém o preço unitário do produto no item.
      */
     public BigDecimal getPrecoUnitario() {
         return precoUnitario;
     }
-    
+
     /**
-     * Define o preço unitário do produto no momento da venda.
-     * 
-     * @param precoUnitario Preço unitário
+     * Define o preço unitário do produto no item.
      */
     public void setPrecoUnitario(BigDecimal precoUnitario) {
         this.precoUnitario = precoUnitario;
     }
-    
+
     /**
-     * Obtém o subtotal do item (preço unitário × quantidade).
-     * 
-     * @return Subtotal do item
+     * Obtém o subtotal do item (preço x quantidade).
      */
     public BigDecimal getSubtotal() {
         return subtotal;
     }
-    
+
     /**
-     * Define o subtotal do item (preço unitário × quantidade).
-     * 
-     * @param subtotal Subtotal do item
+     * Define o subtotal do item (preço x quantidade).
      */
     public void setSubtotal(BigDecimal subtotal) {
         this.subtotal = subtotal;
+    }
+
+    /**
+     * Obtém o total_item (compatível com coluna do banco).
+     */
+    public BigDecimal getTotalItem() {
+        return totalItem;
+    }
+
+    /**
+     * Define o total_item (compatível com coluna do banco).
+     */
+    public void setTotalItem(BigDecimal totalItem) {
+        this.totalItem = totalItem;
     }
 }

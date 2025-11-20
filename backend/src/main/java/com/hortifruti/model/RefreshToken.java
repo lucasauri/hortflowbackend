@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 import java.time.Instant;
 import java.util.UUID;
 
+/**
+ * Entidade que representa um token de atualização.
+ */
 @Entity
 @Table(name = "refresh_tokens")
 public class RefreshToken {
@@ -33,6 +36,9 @@ public class RefreshToken {
     @Column(name = "created_at", nullable = false)
     private Instant createdAt;
 
+    /**
+     * Define o ID e a data de criação antes da persistência.
+     */
     @PrePersist
     public void prePersist() {
         if (id == null) {

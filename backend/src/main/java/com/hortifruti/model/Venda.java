@@ -30,6 +30,11 @@ public class Venda {
     @JoinColumn(name = "cliente_id", nullable = false)
     private Cliente cliente;
     
+    /** Endereço de entrega selecionado para a venda (pertence ao cliente) */
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "endereco_id")
+    private Endereco enderecoEntrega;
+    
     @Column(nullable = false)
     private LocalDateTime dataVenda;
     
@@ -123,6 +128,24 @@ public class Venda {
      */
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
+    }
+    
+    /**
+     * Obtém o endereço de entrega da venda.
+     * 
+     * @return Endereço de entrega
+     */
+    public Endereco getEnderecoEntrega() {
+        return enderecoEntrega;
+    }
+    
+    /**
+     * Define o endereço de entrega da venda.
+     * 
+     * @param enderecoEntrega Endereço de entrega (deve pertencer ao cliente)
+     */
+    public void setEnderecoEntrega(Endereco enderecoEntrega) {
+        this.enderecoEntrega = enderecoEntrega;
     }
     
     /**

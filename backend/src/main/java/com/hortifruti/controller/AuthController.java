@@ -28,6 +28,10 @@ public class AuthController {
 
     private final AuthService authService;
 
+    /**
+     * Construtor para injeção de dependências.
+     * @param authService Serviço de autenticação
+     */
     public AuthController(AuthService authService) {
         this.authService = authService;
     }
@@ -51,6 +55,11 @@ public class AuthController {
         return ResponseEntity.ok(new LoginResponse(true, "Login efetuado", tokens.accessToken(), tokens.refreshToken(), dto));
     }
 
+    /**
+     * Retorna o perfil do usuário autenticado.
+     * @param authentication Objeto de autenticação do Spring Security
+     * @return O DTO do usuário autenticado
+     */
     @Operation(summary = "Usuário atual", description = "Retorna o perfil do usuário autenticado")
     @GetMapping("/me")
     public ResponseEntity<UserDto> me(Authentication authentication) {
@@ -64,6 +73,11 @@ public class AuthController {
                 .orElse(ResponseEntity.status(401).build());
     }
 
+    /**
+     * Gera um novo access token a partir de um refresh token válido.
+     * @param request Objeto com o refresh token
+     * @return Resposta com os novos tokens ou erro
+     */
     @Operation(summary = "Renovar access token", description = "Gera um novo access token a partir de um refresh token válido")
     @PostMapping("/refresh")
     public ResponseEntity<LoginResponse> refresh(@Valid @RequestBody RefreshRequest request) {
@@ -77,6 +91,11 @@ public class AuthController {
         return ResponseEntity.ok(new LoginResponse(true, "Token renovado", tokens.accessToken(), tokens.refreshToken(), dto));
     }
 
+    /**
+     * Realiza logout do usuário, invalidando seus refresh tokens.
+     * @param authentication Objeto de autenticação do Spring Security
+     * @return Resposta vazia
+     */
     @Operation(summary = "Logout", description = "Revoga refresh tokens do usuário atual")
     @PostMapping("/logout")
     public ResponseEntity<Void> logout(Authentication authentication) {

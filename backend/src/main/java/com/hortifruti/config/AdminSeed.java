@@ -9,11 +9,19 @@ import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
+/**
+ * Componente para semear o usuário administrador no banco de dados na inicialização do aplicativo.
+ */
 @Component
 public class AdminSeed implements ApplicationRunner {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
+    /**
+     * Construtor para injeção de dependências.
+     * @param userRepository Repositório de usuários
+     * @param passwordEncoder Codificador de senhas
+     */
     public AdminSeed(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;

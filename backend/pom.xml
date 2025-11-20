@@ -112,6 +112,14 @@
             <artifactId>layout</artifactId>
             <version>7.2.5</version>
         </dependency>
+
+        <!-- Lombok for reducing boilerplate in DTOs and simple classes -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.34</version>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 
     <build>
@@ -131,6 +139,14 @@
                     <source>17</source>
                     <target>17</target>
                     <encoding>UTF-8</encoding>
+                    <!-- Ensure Lombok runs as an annotation processor during compilation -->
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>1.18.34</version>
+                        </path>
+                    </annotationProcessorPaths>
                 </configuration>
             </plugin>
 
@@ -157,10 +173,6 @@
                     <windowtitle>HortiFlow API Documentation</windowtitle>
                     <doctitle>HortiFlow Backend API Documentation</doctitle>
                     <bottom>Copyright © 2024 Hortifruti Team. All rights reserved.</bottom>
-                    <failOnError>false</failOnError>
-                    <additionalOptions>
-                        <additionalOption>-Xdoclint:none</additionalOption>
-                    </additionalOptions>
                 </configuration>
             </plugin>
         </plugins>

@@ -13,12 +13,21 @@ import java.util.Date;
 import java.util.Map;
 import java.util.UUID;
 
+/**
+ * Serviço para criação e validação de JSON Web Tokens (JWT).
+ */
 @Service
 public class JwtService {
     private final Key key;
     private final long accessExpSeconds;
     private final long refreshExpSeconds;
 
+    /**
+     * Construtor que inicializa o serviço com as configurações de JWT.
+     * @param secret A chave secreta para assinar os tokens
+     * @param accessExpSeconds O tempo de expiração do token de acesso em segundos
+     * @param refreshExpSeconds O tempo de expiração do token de atualização em segundos
+     */
     public JwtService(
             @Value("${app.jwt.secret}") String secret,
             @Value("${app.jwt.access.exp:900}") long accessExpSeconds,
@@ -29,6 +38,12 @@ public class JwtService {
         this.refreshExpSeconds = refreshExpSeconds;
     }
 
+    /**
+     * Gera um token de acesso.
+     * @param subject O "subject" do token (geralmente o ID do usuário)
+     * @param claims Claims adicionais a serem incluídos no token
+     * @return O token de acesso JWT
+     */
     public String generateAccessToken(String subject, Map<String, Object> claims) {
         Instant now = Instant.now();
         return Jwts.builder()
@@ -40,6 +55,12 @@ public class JwtService {
                 .compact();
     }
 
+    /**
+     * Gera um token de atualização.
+     * @param subject O "subject" do token (geralmente o ID do usuário)
+     * @param jti O ID único do token (JWT ID)
+     * @return O token de atualização JWT
+     */
     public String generateRefreshToken(String subject, String jti) {
         Instant now = Instant.now();
         return Jwts.builder()
@@ -51,6 +72,11 @@ public class JwtService {
                 .compact();
     }
 
+    /**
+     * Analisa um token JWT e retorna seus claims.
+     * @param token O token JWT a ser analisado
+     * @return Os claims contidos no token
+     */
     public Claims parse(String token) {
         return Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token).getBody();
     }

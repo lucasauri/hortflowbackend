@@ -63,23 +63,42 @@ public class ProdutoController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+    /**
+     * Busca produtos com estoque baixo.
+     * @return Lista de produtos com estoque baixo.
+     */
     @GetMapping("/estoque-baixo")
     public ResponseEntity<List<Produto>> buscarComEstoqueBaixo() {
         List<Produto> produtos = produtoService.buscarComEstoqueBaixo();
         return ResponseEntity.ok(produtos);
     }
 
+    /**
+     * Verifica a saúde do serviço.
+     * @return Um mapa com o status "OK".
+     */
     @GetMapping("/health")
     public ResponseEntity<Map<String, String>> health() {
         return ResponseEntity.ok(Map.of("status", "OK"));
     }
 
+    /**
+     * Cria um novo produto.
+     * @param produto O produto a ser criado.
+     * @return O produto criado.
+     */
     @PostMapping
     public ResponseEntity<Produto> criar(@Valid @RequestBody Produto produto) {
         Produto produtoCriado = produtoService.criar(produto);
         return ResponseEntity.status(HttpStatus.CREATED).body(produtoCriado);
     }
 
+    /**
+     * Atualiza um produto existente.
+     * @param id O ID do produto a ser atualizado.
+     * @param produto O produto com os dados atualizados.
+     * @return O produto atualizado.
+     */
     @PutMapping("/{id}")
     public ResponseEntity<Produto> atualizar(@PathVariable Long id, @Valid @RequestBody Produto produto) {
         produto.setId(id);
@@ -88,6 +107,11 @@ public class ProdutoController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+    /**
+     * Remove um produto.
+     * @param id O ID do produto a ser removido.
+     * @return Uma resposta sem conteúdo.
+     */
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> remover(@PathVariable Long id) {
         if (produtoService.remover(id)) {
@@ -97,6 +121,12 @@ public class ProdutoController {
         }
     }
 
+    /**
+     * Adiciona uma movimentação de estoque a um produto.
+     * @param id O ID do produto.
+     * @param movimentacao A requisição de movimentação.
+     * @return Uma mensagem de sucesso.
+     */
     @PostMapping("/{id}/movimentacao")
     public ResponseEntity<Map<String, String>> adicionarMovimentacao(
             @PathVariable Long id,

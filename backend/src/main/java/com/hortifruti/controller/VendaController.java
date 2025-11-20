@@ -3,6 +3,7 @@ package com.hortifruti.controller;
 import com.hortifruti.model.Venda;
 import com.hortifruti.service.VendaService;
 import com.hortifruti.service.PdfService;
+import com.hortifruti.repository.VendaRepository;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,9 @@ public class VendaController {
 
     @Autowired
     private PdfService pdfService;
+
+    @Autowired
+    private VendaRepository vendaRepository;
     
     /**
      * Cria uma nova venda.
@@ -61,8 +65,11 @@ public class VendaController {
     }
     
     @PutMapping("/{id}/finalizar")
-    public ResponseEntity<?> finalizarVenda(@PathVariable Long id, @RequestParam String formaPagamento) {
+    public ResponseEntity<?> finalizarVenda(@PathVariable Long id, @RequestParam(required = false) String formaPagamento) {
         try {
+            if (formaPagamento == null || formaPagamento.isBlank()) {
+                formaPagamento = "pix"; // valor padrão para robustez quando front não enviar
+            }
             Venda venda = vendaService.finalizarVenda(id, formaPagamento);
             return ResponseEntity.ok(venda);
         } catch (RuntimeException e) {
@@ -71,6 +78,56 @@ public class VendaController {
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(new ErrorResponse("Erro ao finalizar venda: " + e.getMessage()));
+        }
+    }
+
+    @PutMapping("/numero/{numero}/finalizar")
+    public ResponseEntity<?> finalizarVendaPorNumero(@PathVariable String numero, @RequestParam(required = false) String formaPagamento) {
+        try {
+            if (formaPagamento == null || formaPagamento.isBlank()) {
+                formaPagamento = "pix";
+            }
+            Venda venda = vendaService.finalizarVendaPorNumero(numero, formaPagamento);
+            return ResponseEntity.ok(venda);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(new ErrorResponse(e.getMessage()));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ErrorResponse("Erro ao finalizar venda: " + e.getMessage()));
+        }
+    }
+
+    /**
+     * Finaliza a venda e retorna o PDF do recibo.
+     */
+    @Operation(summary = "Finalizar venda e gerar PDF", description = "Finaliza a venda e retorna o PDF do recibo em linha.")
+    @PutMapping("/{id}/finalizar/pdf")
+    public ResponseEntity<?> finalizarVendaGerarPdf(@PathVariable Long id, @RequestParam(required = false) String formaPagamento) {
+        try {
+            if (formaPagamento == null || formaPagamento.isBlank()) {
+                formaPagamento = "pix"; // valor padrão
+            }
+            Venda vendaFinalizada = vendaService.finalizarVenda(id, formaPagamento);
+            // Recarrega com itens/produto/cliente para evitar LazyInitialization ao gerar PDF
+            Venda venda = vendaRepository.findByIdWithItensProdutoCliente(vendaFinalizada.getId())
+                    .orElseThrow(() -> new RuntimeException("Venda não encontrada para gerar PDF"));
+
+            ByteArrayInputStream pdfStream = pdfService.gerarPdfVenda(venda);
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.add("Content-Disposition", "inline; filename=venda_" + venda.getNumeroVenda() + ".pdf");
+
+            return ResponseEntity.ok()
+                    .headers(headers)
+                    .contentType(MediaType.APPLICATION_PDF)
+                    .body(new InputStreamResource(pdfStream));
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(new ErrorResponse(e.getMessage()));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ErrorResponse("Erro ao finalizar venda e gerar PDF: " + e.getMessage()));
         }
     }
     
@@ -154,7 +211,7 @@ public class VendaController {
     @GetMapping("/{id}/pdf")
     public ResponseEntity<?> gerarPdfVenda(@PathVariable Long id) {
         try {
-            Optional<Venda> venda = vendaService.buscarPorId(id);
+            Optional<Venda> venda = vendaRepository.findByIdWithItensProdutoCliente(id);
             
             if (venda.isEmpty()) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND)

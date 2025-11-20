@@ -2,6 +2,7 @@ package com.hortifruti.service;
 
 import com.hortifruti.model.*;
 import com.hortifruti.repository.*;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,11 +28,30 @@ public class VendaService {
     @Autowired
     private MovimentacaoEstoqueRepository movimentacaoEstoqueRepository;
     
+    @Autowired
+    private EnderecoRepository enderecoRepository;
+    
     @Transactional
     public Venda criarVenda(Venda venda) {
         // Validar cliente
         Cliente cliente = clienteRepository.findById(venda.getCliente().getId())
                 .orElseThrow(() -> new RuntimeException("Cliente não encontrado"));
+        
+        if (venda.getEnderecoEntrega() != null && venda.getEnderecoEntrega().getId() != null) {
+            Long enderecoId = venda.getEnderecoEntrega().getId();
+            Endereco endereco = enderecoRepository.findById(enderecoId)
+                    .orElseThrow(() -> new RuntimeException("Endereço de entrega não encontrado"));
+            if (!endereco.getCliente().getId().equals(cliente.getId())) {
+                throw new RuntimeException("Endereço de entrega não pertence ao cliente informado");
+            }
+            venda.setEnderecoEntrega(endereco);
+        } else {
+            // Fallback: se o front não enviar endereço, usar o principal do cliente (se existir)
+            List<Endereco> enderecos = enderecoRepository.findByClienteIdOrderByPrincipalDesc(cliente.getId());
+            if (enderecos != null && !enderecos.isEmpty()) {
+                venda.setEnderecoEntrega(enderecos.get(0));
+            }
+        }
         
         // Gerar número da venda
         String numeroVenda = gerarNumeroVenda();
@@ -62,6 +82,8 @@ public class VendaService {
             item.setVenda(venda);
             item.setPrecoUnitario(BigDecimal.valueOf(produto.getPreco()));
             item.setSubtotal(BigDecimal.valueOf(produto.getPreco()).multiply(BigDecimal.valueOf(item.getQuantidade())));
+            // Preencher totalItem para compatibilidade com coluna NOT NULL
+            item.setTotalItem(item.getSubtotal());
             
             valorTotal = valorTotal.add(item.getSubtotal());
             
@@ -101,6 +123,21 @@ public class VendaService {
         venda.setStatus(Venda.StatusVenda.FINALIZADA);
         venda.setFormaPagamento(formaPagamento);
         
+        return vendaRepository.save(venda);
+    }
+
+    @Transactional
+    public Venda finalizarVendaPorNumero(String numeroVenda, String formaPagamento) {
+        Venda venda = vendaRepository.findByNumeroVenda(numeroVenda)
+                .orElseThrow(() -> new RuntimeException("Venda não encontrada"));
+
+        if (venda.getStatus() != Venda.StatusVenda.PENDENTE) {
+            throw new RuntimeException("Apenas vendas pendentes podem ser finalizadas");
+        }
+
+        venda.setStatus(Venda.StatusVenda.FINALIZADA);
+        venda.setFormaPagamento(formaPagamento);
+
         return vendaRepository.save(venda);
     }
     

@@ -7,6 +7,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Controller REST para dados do dashboard.
+ */
 @RestController
 @RequestMapping("/dashboard")
 @CrossOrigin(origins = "*")
@@ -14,10 +17,18 @@ public class DashboardController {
 
     private final ProdutoService produtoService;
 
+    /**
+     * Construtor para injeção de dependências.
+     * @param produtoService Serviço de produtos
+     */
     public DashboardController(ProdutoService produtoService) {
         this.produtoService = produtoService;
     }
 
+    /**
+     * Retorna estatísticas gerais para o dashboard.
+     * @return Um mapa com as estatísticas
+     */
     @GetMapping("/estatisticas")
     public ResponseEntity<Map<String, Object>> getEstatisticas() {
         Map<String, Object> stats = produtoService.obterEstatisticas();
