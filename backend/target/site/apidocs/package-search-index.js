@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"com.hortifruti"},{"l":"com.hortifruti.config"},{"l":"com.hortifruti.controller"},{"l":"com.hortifruti.dto"},{"l":"com.hortifruti.exception"},{"l":"com.hortifruti.model"},{"l":"com.hortifruti.repository"},{"l":"com.hortifruti.security"},{"l":"com.hortifruti.service"}];updateSearchResults();

@@ -77,6 +77,8 @@ public class ClienteController {
 
     /**
      * Cria um novo cliente juntamente com seu endereço principal.
+     * @param request Objeto ClienteEnderecoRequest contendo os dados do cliente e endereço.
+     * @return ClienteEnderecoResponse contendo o cliente e endereço criados.
      */
     @PostMapping("/com-endereco")
     public ResponseEntity<ClienteEnderecoResponse> criarComEndereco(@Valid @RequestBody ClienteEnderecoRequest request) {

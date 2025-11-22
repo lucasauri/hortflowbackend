@@ -1,0 +1,138 @@
+@options
+@packages
+-classpath
+'C:/Users/lucas/.m2/repository/org/springframework/boot/spring-boot-starter-web/3.3.4/spring-boot-starter-web-3.3.4.jar;C:/Users/lucas/.m2/repository/org/springframework/boot/spring-boot-starter/3.3.4/spring-boot-starter-3.3.4.jar;C:/Users/lucas/.m2/repository/org/springframework/boot/spring-boot/3.3.4/spring-boot-3.3.4.jar;C:/Users/lucas/.m2/repository/org/springframework/boot/spring-boot-autoconfigure/3.3.4/spring-boot-autoconfigure-3.3.4.jar;C:/Users/lucas/.m2/repository/org/springframework/boot/spring-boot-starter-logging/3.3.4/spring-boot-starter-logging-3.3.4.jar;C:/Users/lucas/.m2/repository/ch/qos/logback/logback-classic/1.5.8/logback-classic-1.5.8.jar;C:/Users/lucas/.m2/repository/ch/qos/logback/logback-core/1.5.8/logback-core-1.5.8.jar;C:/Users/lucas/.m2/repository/org/apache/logging/log4j/log4j-to-slf4j/2.23.1/log4j-to-slf4j-2.23.1.jar;C:/Users/lucas/.m2/repository/org/apache/logging/log4j/log4j-api/2.23.1/log4j-api-2.23.1.jar;C:/Users/lucas/.m2/repository/org/slf4j/jul-to-slf4j/2.0.16/jul-to-slf4j-2.0.16.jar;C:/Users/lucas/.m2/repository/jakarta/annotation/jakarta.annotation-api/2.1.1/jakarta.annotation-api-2.1.1.jar;C:/Users/lucas/.m2/repository/org/yaml/snakeyaml/2.2/snakeyaml-2.2.jar;C:/Users/lucas/.m2/repository/org/springframework/boot/spring-boot-starter-json/3.3.4/spring-boot-starter-json-3.3.4.jar;C:/Users/lucas/.m2/repository/com/fasterxml/jackson/datatype/jackson-datatype-jdk8/2.17.2/jackson-datatype-jdk8-2.17.2.jar;C:/Users/lucas/.m2/repository/com/fasterxml/jackson/datatype/jackson-datatype-jsr310/2.17.2/jackson-datatype-jsr310-2.17.2.jar;C:/Users/lucas/.m2/repository/com/fasterxml/jackson/module/jackson-module-parameter-names/2.17.2/jackson-module-parameter-names-2.17.2.jar;C:/Users/lucas/.m2/repository/org/springframework/boot/spring-boot-starter-tomcat/3.3.4/spring-boot-starter-tomcat-3.3.4.jar;C:/Users/lucas/.m2/repository/org/apache/tomcat/embed/tomcat-embed-core/10.1.30/tomcat-embed-core-10.1.30.jar;C:/Users/lucas/.m2/repository/org/apache/tomcat/embed/tomcat-embed-websocket/10.1.30/tomcat-embed-websocket-10.1.30.jar;C:/Users/lucas/.m2/repository/org/springframework/spring-web/6.1.13/spring-web-6.1.13.jar;C:/Users/lucas/.m2/repository/org/springframework/spring-beans/6.1.13/spring-beans-6.1.13.jar;C:/Users/lucas/.m2/repository/io/micrometer/micrometer-observation/1.13.4/micrometer-observation-1.13.4.jar;C:/Users/lucas/.m2/repository/io/micrometer/micrometer-commons/1.13.4/micrometer-commons-1.13.4.jar;C:/Users/lucas/.m2/repository/org/springframework/spring-webmvc/6.1.13/spring-webmvc-6.1.13.jar;C:/Users/lucas/.m2/repository/org/springframework/spring-context/6.1.13/spring-context-6.1.13.jar;C:/Users/lucas/.m2/repository/org/springframework/spring-expression/6.1.13/spring-expression-6.1.13.jar;C:/Users/lucas/.m2/repository/org/springframework/boot/spring-boot-starter-data-jpa/3.3.4/spring-boot-starter-data-jpa-3.3.4.jar;C:/Users/lucas/.m2/repository/org/springframework/boot/spring-boot-starter-aop/3.3.4/spring-boot-starter-aop-3.3.4.jar;C:/Users/lucas/.m2/repository/org/aspectj/aspectjweaver/1.9.22.1/aspectjweaver-1.9.22.1.jar;C:/Users/lucas/.m2/repository/org/springframework/boot/spring-boot-starter-jdbc/3.3.4/spring-boot-starter-jdbc-3.3.4.jar;C:/Users/lucas/.m2/repository/com/zaxxer/HikariCP/5.1.0/HikariCP-5.1.0.jar;C:/Users/lucas/.m2/repository/org/springframework/spring-jdbc/6.1.13/spring-jdbc-6.1.13.jar;C:/Users/lucas/.m2/repository/org/hibernate/orm/hibernate-core/6.5.3.Final/hibernate-core-6.5.3.Final.jar;C:/Users/lucas/.m2/repository/jakarta/persistence/jakarta.persistence-api/3.1.0/jakarta.persistence-api-3.1.0.jar;C:/Users/lucas/.m2/repository/jakarta/transaction/jakarta.transaction-api/2.0.1/jakarta.transaction-api-2.0.1.jar;C:/Users/lucas/.m2/repository/org/jboss/logging/jboss-logging/3.5.3.Final/jboss-logging-3.5.3.Final.jar;C:/Users/lucas/.m2/repository/com/fasterxml/classmate/1.7.0/classmate-1.7.0.jar;C:/Users/lucas/.m2/repository/org/antlr/antlr4-runtime/4.13.0/antlr4-runtime-4.13.0.jar;C:/Users/lucas/.m2/repository/org/springframework/data/spring-data-jpa/3.3.4/spring-data-jpa-3.3.4.jar;C:/Users/lucas/.m2/repository/org/springframework/data/spring-data-commons/3.3.4/spring-data-commons-3.3.4.jar;C:/Users/lucas/.m2/repository/org/springframework/spring-orm/6.1.13/spring-orm-6.1.13.jar;C:/Users/lucas/.m2/repository/org/springframework/spring-tx/6.1.13/spring-tx-6.1.13.jar;C:/Users/lucas/.m2/repository/org/springframework/spring-aspects/6.1.13/spring-aspects-6.1.13.jar;C:/Users/lucas/.m2/repository/org/springframework/boot/spring-boot-starter-security/3.3.4/spring-boot-starter-security-3.3.4.jar;C:/Users/lucas/.m2/repository/org/springframework/spring-aop/6.1.13/spring-aop-6.1.13.jar;C:/Users/lucas/.m2/repository/org/springframework/security/spring-security-config/6.3.3/spring-security-config-6.3.3.jar;C:/Users/lucas/.m2/repository/org/springframework/security/spring-security-core/6.3.3/spring-security-core-6.3.3.jar;C:/Users/lucas/.m2/repository/org/springframework/security/spring-security-crypto/6.3.3/spring-security-crypto-6.3.3.jar;C:/Users/lucas/.m2/repository/org/springframework/security/spring-security-web/6.3.3/spring-security-web-6.3.3.jar;C:/Users/lucas/.m2/repository/io/jsonwebtoken/jjwt-api/0.11.5/jjwt-api-0.11.5.jar;C:/Users/lucas/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.17.2/jackson-databind-2.17.2.jar;C:/Users/lucas/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.17.2/jackson-annotations-2.17.2.jar;C:/Users/lucas/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.17.2/jackson-core-2.17.2.jar;C:/Users/lucas/.m2/repository/org/springframework/boot/spring-boot-starter-validation/3.3.4/spring-boot-starter-validation-3.3.4.jar;C:/Users/lucas/.m2/repository/org/apache/tomcat/embed/tomcat-embed-el/10.1.30/tomcat-embed-el-10.1.30.jar;C:/Users/lucas/.m2/repository/org/hibernate/validator/hibernate-validator/8.0.1.Final/hibernate-validator-8.0.1.Final.jar;C:/Users/lucas/.m2/repository/jakarta/validation/jakarta.validation-api/3.0.2/jakarta.validation-api-3.0.2.jar;C:/Users/lucas/.m2/repository/jakarta/xml/bind/jakarta.xml.bind-api/4.0.2/jakarta.xml.bind-api-4.0.2.jar;C:/Users/lucas/.m2/repository/jakarta/activation/jakarta.activation-api/2.1.3/jakarta.activation-api-2.1.3.jar;C:/Users/lucas/.m2/repository/org/springframework/spring-core/6.1.13/spring-core-6.1.13.jar;C:/Users/lucas/.m2/repository/org/springframework/spring-jcl/6.1.13/spring-jcl-6.1.13.jar;C:/Users/lucas/.m2/repository/org/springdoc/springdoc-openapi-starter-webmvc-ui/2.6.0/springdoc-openapi-starter-webmvc-ui-2.6.0.jar;C:/Users/lucas/.m2/repository/org/springdoc/springdoc-openapi-starter-webmvc-api/2.6.0/springdoc-openapi-starter-webmvc-api-2.6.0.jar;C:/Users/lucas/.m2/repository/org/springdoc/springdoc-openapi-starter-common/2.6.0/springdoc-openapi-starter-common-2.6.0.jar;C:/Users/lucas/.m2/repository/io/swagger/core/v3/swagger-core-jakarta/2.2.22/swagger-core-jakarta-2.2.22.jar;C:/Users/lucas/.m2/repository/org/apache/commons/commons-lang3/3.14.0/commons-lang3-3.14.0.jar;C:/Users/lucas/.m2/repository/io/swagger/core/v3/swagger-annotations-jakarta/2.2.22/swagger-annotations-jakarta-2.2.22.jar;C:/Users/lucas/.m2/repository/io/swagger/core/v3/swagger-models-jakarta/2.2.22/swagger-models-jakarta-2.2.22.jar;C:/Users/lucas/.m2/repository/com/fasterxml/jackson/dataformat/jackson-dataformat-yaml/2.17.2/jackson-dataformat-yaml-2.17.2.jar;C:/Users/lucas/.m2/repository/org/webjars/swagger-ui/5.17.14/swagger-ui-5.17.14.jar;C:/Users/lucas/.m2/repository/com/itextpdf/itext7-core/7.2.5/itext7-core-7.2.5.pom;C:/Users/lucas/.m2/repository/com/itextpdf/barcodes/7.2.5/barcodes-7.2.5.jar;C:/Users/lucas/.m2/repository/com/itextpdf/font-asian/7.2.5/font-asian-7.2.5.jar;C:/Users/lucas/.m2/repository/com/itextpdf/forms/7.2.5/forms-7.2.5.jar;C:/Users/lucas/.m2/repository/com/itextpdf/hyph/7.2.5/hyph-7.2.5.jar;C:/Users/lucas/.m2/repository/com/itextpdf/io/7.2.5/io-7.2.5.jar;C:/Users/lucas/.m2/repository/com/itextpdf/commons/7.2.5/commons-7.2.5.jar;C:/Users/lucas/.m2/repository/com/itextpdf/pdfa/7.2.5/pdfa-7.2.5.jar;C:/Users/lucas/.m2/repository/com/itextpdf/sign/7.2.5/sign-7.2.5.jar;C:/Users/lucas/.m2/repository/com/itextpdf/styled-xml-parser/7.2.5/styled-xml-parser-7.2.5.jar;C:/Users/lucas/.m2/repository/com/itextpdf/svg/7.2.5/svg-7.2.5.jar;C:/Users/lucas/.m2/repository/com/itextpdf/kernel/7.2.5/kernel-7.2.5.jar;C:/Users/lucas/.m2/repository/org/bouncycastle/bcpkix-jdk15on/1.70/bcpkix-jdk15on-1.70.jar;C:/Users/lucas/.m2/repository/org/bouncycastle/bcutil-jdk15on/1.70/bcutil-jdk15on-1.70.jar;C:/Users/lucas/.m2/repository/org/bouncycastle/bcprov-jdk15on/1.70/bcprov-jdk15on-1.70.jar;C:/Users/lucas/.m2/repository/org/slf4j/slf4j-api/2.0.16/slf4j-api-2.0.16.jar;C:/Users/lucas/.m2/repository/com/itextpdf/layout/7.2.5/layout-7.2.5.jar;C:/Users/lucas/.m2/repository/org/projectlombok/lombok/1.18.34/lombok-1.18.34.jar'
+-encoding
+'UTF-8'
+-protected
+--release
+17
+-sourcepath
+'C:/dsv/ProjetoHortiflow/backend/src/main/java'
+-author
+-bottom
+'Copyright © 2024 Hortifruti Team. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'C:/dsv/ProjetoHortiflow/backend/target/site/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'HortiFlow Backend API Documentation'
+-use
+-version
+-windowtitle
+'HortiFlow API Documentation'
+com.hortifruti.config
+com.hortifruti.controller
+com.hortifruti.dto
+com.hortifruti.exception
+com.hortifruti
+com.hortifruti.model
+com.hortifruti.repository
+com.hortifruti.security
+com.hortifruti.service
+C:\Users\lucas\.m2\repository\org\springframework\boot\spring-boot-starter-web\3.3.4\spring-boot-starter-web-3.3.4.jar = 1728339093806
+C:\Users\lucas\.m2\repository\org\springframework\boot\spring-boot-starter\3.3.4\spring-boot-starter-3.3.4.jar = 1728339092800
+C:\Users\lucas\.m2\repository\org\springframework\boot\spring-boot\3.3.4\spring-boot-3.3.4.jar = 1728339097886
+C:\Users\lucas\.m2\repository\org\springframework\boot\spring-boot-autoconfigure\3.3.4\spring-boot-autoconfigure-3.3.4.jar = 1728339098211
+C:\Users\lucas\.m2\repository\org\springframework\boot\spring-boot-starter-logging\3.3.4\spring-boot-starter-logging-3.3.4.jar = 1728339092965
+C:\Users\lucas\.m2\repository\ch\qos\logback\logback-classic\1.5.8\logback-classic-1.5.8.jar = 1728339093693
+C:\Users\lucas\.m2\repository\ch\qos\logback\logback-core\1.5.8\logback-core-1.5.8.jar = 1728339094143
+C:\Users\lucas\.m2\repository\org\apache\logging\log4j\log4j-to-slf4j\2.23.1\log4j-to-slf4j-2.23.1.jar = 1723919852949
+C:\Users\lucas\.m2\repository\org\apache\logging\log4j\log4j-api\2.23.1\log4j-api-2.23.1.jar = 1723919852763
+C:\Users\lucas\.m2\repository\org\slf4j\jul-to-slf4j\2.0.16\jul-to-slf4j-2.0.16.jar = 1724591327153
+C:\Users\lucas\.m2\repository\jakarta\annotation\jakarta.annotation-api\2.1.1\jakarta.annotation-api-2.1.1.jar = 1723919853180
+C:\Users\lucas\.m2\repository\org\yaml\snakeyaml\2.2\snakeyaml-2.2.jar = 1723919853060
+C:\Users\lucas\.m2\repository\org\springframework\boot\spring-boot-starter-json\3.3.4\spring-boot-starter-json-3.3.4.jar = 1728339093909
+C:\Users\lucas\.m2\repository\com\fasterxml\jackson\datatype\jackson-datatype-jdk8\2.17.2\jackson-datatype-jdk8-2.17.2.jar = 1724591328516
+C:\Users\lucas\.m2\repository\com\fasterxml\jackson\datatype\jackson-datatype-jsr310\2.17.2\jackson-datatype-jsr310-2.17.2.jar = 1724591327515
+C:\Users\lucas\.m2\repository\com\fasterxml\jackson\module\jackson-module-parameter-names\2.17.2\jackson-module-parameter-names-2.17.2.jar = 1724591328003
+C:\Users\lucas\.m2\repository\org\springframework\boot\spring-boot-starter-tomcat\3.3.4\spring-boot-starter-tomcat-3.3.4.jar = 1728339094011
+C:\Users\lucas\.m2\repository\org\apache\tomcat\embed\tomcat-embed-core\10.1.30\tomcat-embed-core-10.1.30.jar = 1728339098076
+C:\Users\lucas\.m2\repository\org\apache\tomcat\embed\tomcat-embed-websocket\10.1.30\tomcat-embed-websocket-10.1.30.jar = 1728339094786
+C:\Users\lucas\.m2\repository\org\springframework\spring-web\6.1.13\spring-web-6.1.13.jar = 1728339096169
+C:\Users\lucas\.m2\repository\org\springframework\spring-beans\6.1.13\spring-beans-6.1.13.jar = 1728339094330
+C:\Users\lucas\.m2\repository\io\micrometer\micrometer-observation\1.13.4\micrometer-observation-1.13.4.jar = 1728339094707
+C:\Users\lucas\.m2\repository\io\micrometer\micrometer-commons\1.13.4\micrometer-commons-1.13.4.jar = 1728339095543
+C:\Users\lucas\.m2\repository\org\springframework\spring-webmvc\6.1.13\spring-webmvc-6.1.13.jar = 1728339095941
+C:\Users\lucas\.m2\repository\org\springframework\spring-context\6.1.13\spring-context-6.1.13.jar = 1728339094326
+C:\Users\lucas\.m2\repository\org\springframework\spring-expression\6.1.13\spring-expression-6.1.13.jar = 1728339095874
+C:\Users\lucas\.m2\repository\org\springframework\boot\spring-boot-starter-data-jpa\3.3.4\spring-boot-starter-data-jpa-3.3.4.jar = 1728339087224
+C:\Users\lucas\.m2\repository\org\springframework\boot\spring-boot-starter-aop\3.3.4\spring-boot-starter-aop-3.3.4.jar = 1728339087320
+C:\Users\lucas\.m2\repository\org\aspectj\aspectjweaver\1.9.22.1\aspectjweaver-1.9.22.1.jar = 1724591325669
+C:\Users\lucas\.m2\repository\org\springframework\boot\spring-boot-starter-jdbc\3.3.4\spring-boot-starter-jdbc-3.3.4.jar = 1728339087324
+C:\Users\lucas\.m2\repository\com\zaxxer\HikariCP\5.1.0\HikariCP-5.1.0.jar = 1724591325391
+C:\Users\lucas\.m2\repository\org\springframework\spring-jdbc\6.1.13\spring-jdbc-6.1.13.jar = 1728339088651
+C:\Users\lucas\.m2\repository\org\hibernate\orm\hibernate-core\6.5.3.Final\hibernate-core-6.5.3.Final.jar = 1728339099042
+C:\Users\lucas\.m2\repository\jakarta\persistence\jakarta.persistence-api\3.1.0\jakarta.persistence-api-3.1.0.jar = 1724591325548
+C:\Users\lucas\.m2\repository\jakarta\transaction\jakarta.transaction-api\2.0.1\jakarta.transaction-api-2.0.1.jar = 1724591326088
+C:\Users\lucas\.m2\repository\org\jboss\logging\jboss-logging\3.5.3.Final\jboss-logging-3.5.3.Final.jar = 1724591325596
+C:\Users\lucas\.m2\repository\com\fasterxml\classmate\1.7.0\classmate-1.7.0.jar = 1724591325736
+C:\Users\lucas\.m2\repository\org\antlr\antlr4-runtime\4.13.0\antlr4-runtime-4.13.0.jar = 1724591326421
+C:\Users\lucas\.m2\repository\org\springframework\data\spring-data-jpa\3.3.4\spring-data-jpa-3.3.4.jar = 1728339092987
+C:\Users\lucas\.m2\repository\org\springframework\data\spring-data-commons\3.3.4\spring-data-commons-3.3.4.jar = 1728339089944
+C:\Users\lucas\.m2\repository\org\springframework\spring-orm\6.1.13\spring-orm-6.1.13.jar = 1728339089242
+C:\Users\lucas\.m2\repository\org\springframework\spring-tx\6.1.13\spring-tx-6.1.13.jar = 1728339090584
+C:\Users\lucas\.m2\repository\org\springframework\spring-aspects\6.1.13\spring-aspects-6.1.13.jar = 1728339092514
+C:\Users\lucas\.m2\repository\org\springframework\boot\spring-boot-starter-security\3.3.4\spring-boot-starter-security-3.3.4.jar = 1763211040489
+C:\Users\lucas\.m2\repository\org\springframework\spring-aop\6.1.13\spring-aop-6.1.13.jar = 1728339088827
+C:\Users\lucas\.m2\repository\org\springframework\security\spring-security-config\6.3.3\spring-security-config-6.3.3.jar = 1763211041272
+C:\Users\lucas\.m2\repository\org\springframework\security\spring-security-core\6.3.3\spring-security-core-6.3.3.jar = 1763211041044
+C:\Users\lucas\.m2\repository\org\springframework\security\spring-security-crypto\6.3.3\spring-security-crypto-6.3.3.jar = 1724591328453
+C:\Users\lucas\.m2\repository\org\springframework\security\spring-security-web\6.3.3\spring-security-web-6.3.3.jar = 1763211041146
+C:\Users\lucas\.m2\repository\io\jsonwebtoken\jjwt-api\0.11.5\jjwt-api-0.11.5.jar = 1760657022499
+C:\Users\lucas\.m2\repository\com\fasterxml\jackson\core\jackson-databind\2.17.2\jackson-databind-2.17.2.jar = 1724591327559
+C:\Users\lucas\.m2\repository\com\fasterxml\jackson\core\jackson-annotations\2.17.2\jackson-annotations-2.17.2.jar = 1724591327389
+C:\Users\lucas\.m2\repository\com\fasterxml\jackson\core\jackson-core\2.17.2\jackson-core-2.17.2.jar = 1724591327446
+C:\Users\lucas\.m2\repository\org\springframework\boot\spring-boot-starter-validation\3.3.4\spring-boot-starter-validation-3.3.4.jar = 1763211040790
+C:\Users\lucas\.m2\repository\org\apache\tomcat\embed\tomcat-embed-el\10.1.30\tomcat-embed-el-10.1.30.jar = 1728339094512
+C:\Users\lucas\.m2\repository\org\hibernate\validator\hibernate-validator\8.0.1.Final\hibernate-validator-8.0.1.Final.jar = 1756426047469
+C:\Users\lucas\.m2\repository\jakarta\validation\jakarta.validation-api\3.0.2\jakarta.validation-api-3.0.2.jar = 1756426048885
+C:\Users\lucas\.m2\repository\jakarta\xml\bind\jakarta.xml.bind-api\4.0.2\jakarta.xml.bind-api-4.0.2.jar = 1723919853266
+C:\Users\lucas\.m2\repository\jakarta\activation\jakarta.activation-api\2.1.3\jakarta.activation-api-2.1.3.jar = 1723919853266
+C:\Users\lucas\.m2\repository\org\springframework\spring-core\6.1.13\spring-core-6.1.13.jar = 1728339099756
+C:\Users\lucas\.m2\repository\org\springframework\spring-jcl\6.1.13\spring-jcl-6.1.13.jar = 1728339098466
+C:\Users\lucas\.m2\repository\org\springdoc\springdoc-openapi-starter-webmvc-ui\2.6.0\springdoc-openapi-starter-webmvc-ui-2.6.0.jar = 1758587805859
+C:\Users\lucas\.m2\repository\org\springdoc\springdoc-openapi-starter-webmvc-api\2.6.0\springdoc-openapi-starter-webmvc-api-2.6.0.jar = 1758587806536
+C:\Users\lucas\.m2\repository\org\springdoc\springdoc-openapi-starter-common\2.6.0\springdoc-openapi-starter-common-2.6.0.jar = 1758587806129
+C:\Users\lucas\.m2\repository\io\swagger\core\v3\swagger-core-jakarta\2.2.22\swagger-core-jakarta-2.2.22.jar = 1758587806102
+C:\Users\lucas\.m2\repository\org\apache\commons\commons-lang3\3.14.0\commons-lang3-3.14.0.jar = 1740091718010
+C:\Users\lucas\.m2\repository\io\swagger\core\v3\swagger-annotations-jakarta\2.2.22\swagger-annotations-jakarta-2.2.22.jar = 1758587807240
+C:\Users\lucas\.m2\repository\io\swagger\core\v3\swagger-models-jakarta\2.2.22\swagger-models-jakarta-2.2.22.jar = 1758587806002
+C:\Users\lucas\.m2\repository\com\fasterxml\jackson\dataformat\jackson-dataformat-yaml\2.17.2\jackson-dataformat-yaml-2.17.2.jar = 1760050994385
+C:\Users\lucas\.m2\repository\org\webjars\swagger-ui\5.17.14\swagger-ui-5.17.14.jar = 1758587806686
+C:\Users\lucas\.m2\repository\com\itextpdf\itext7-core\7.2.5\itext7-core-7.2.5.pom = 1762479859782
+C:\Users\lucas\.m2\repository\com\itextpdf\barcodes\7.2.5\barcodes-7.2.5.jar = 1762479861604
+C:\Users\lucas\.m2\repository\com\itextpdf\font-asian\7.2.5\font-asian-7.2.5.jar = 1762479886248
+C:\Users\lucas\.m2\repository\com\itextpdf\forms\7.2.5\forms-7.2.5.jar = 1762479864002
+C:\Users\lucas\.m2\repository\com\itextpdf\hyph\7.2.5\hyph-7.2.5.jar = 1762479875835
+C:\Users\lucas\.m2\repository\com\itextpdf\io\7.2.5\io-7.2.5.jar = 1762479866529
+C:\Users\lucas\.m2\repository\com\itextpdf\commons\7.2.5\commons-7.2.5.jar = 1762479862944
+C:\Users\lucas\.m2\repository\com\itextpdf\pdfa\7.2.5\pdfa-7.2.5.jar = 1762479864239
+C:\Users\lucas\.m2\repository\com\itextpdf\sign\7.2.5\sign-7.2.5.jar = 1762479866368
+C:\Users\lucas\.m2\repository\com\itextpdf\styled-xml-parser\7.2.5\styled-xml-parser-7.2.5.jar = 1762479871110
+C:\Users\lucas\.m2\repository\com\itextpdf\svg\7.2.5\svg-7.2.5.jar = 1762479869247
+C:\Users\lucas\.m2\repository\com\itextpdf\kernel\7.2.5\kernel-7.2.5.jar = 1762479869717
+C:\Users\lucas\.m2\repository\org\bouncycastle\bcpkix-jdk15on\1.70\bcpkix-jdk15on-1.70.jar = 1762479885773
+C:\Users\lucas\.m2\repository\org\bouncycastle\bcutil-jdk15on\1.70\bcutil-jdk15on-1.70.jar = 1762479870727
+C:\Users\lucas\.m2\repository\org\bouncycastle\bcprov-jdk15on\1.70\bcprov-jdk15on-1.70.jar = 1762479885731
+C:\Users\lucas\.m2\repository\org\slf4j\slf4j-api\2.0.16\slf4j-api-2.0.16.jar = 1724591326927
+C:\Users\lucas\.m2\repository\com\itextpdf\layout\7.2.5\layout-7.2.5.jar = 1762479878638
+C:\Users\lucas\.m2\repository\org\projectlombok\lombok\1.18.34\lombok-1.18.34.jar = 1724591704737
+C:\dsv\ProjetoHortiflow\backend\src\main\java = 1757857730154
+C:\dsv\ProjetoHortiflow\backend\target\site\apidocs\allclasses-index.html = 1763823928130
+C:\dsv\ProjetoHortiflow\backend\target\site\apidocs\allpackages-index.html = 1763823928136
+C:\dsv\ProjetoHortiflow\backend\target\site\apidocs\element-list = 1763823926327
+C:\dsv\ProjetoHortiflow\backend\target\site\apidocs\help-doc.html = 1763823928513
+C:\dsv\ProjetoHortiflow\backend\target\site\apidocs\index-all.html = 1763823928497
+C:\dsv\ProjetoHortiflow\backend\target\site\apidocs\index.html = 1763823927961
+C:\dsv\ProjetoHortiflow\backend\target\site\apidocs\member-search-index.js = 1763823928164
+C:\dsv\ProjetoHortiflow\backend\target\site\apidocs\module-search-index.js = 1763823928146
+C:\dsv\ProjetoHortiflow\backend\target\site\apidocs\overview-summary.html = 1763823928497
+C:\dsv\ProjetoHortiflow\backend\target\site\apidocs\overview-tree.html = 1763823927948
+C:\dsv\ProjetoHortiflow\backend\target\site\apidocs\package-search-index.js = 1763823928148
+C:\dsv\ProjetoHortiflow\backend\target\site\apidocs\search.html = 1763823928497
+C:\dsv\ProjetoHortiflow\backend\target\site\apidocs\tag-search-index.js = 1763823928166
+C:\dsv\ProjetoHortiflow\backend\target\site\apidocs\type-search-index.js = 1763823928150

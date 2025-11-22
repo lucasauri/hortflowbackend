@@ -141,6 +141,7 @@ public class ItemVenda {
 
     /**
      * Obtém o preço unitário do produto no item.
+     * @return O preço unitário do produto.
      */
     public BigDecimal getPrecoUnitario() {
         return precoUnitario;
@@ -148,6 +149,7 @@ public class ItemVenda {
 
     /**
      * Define o preço unitário do produto no item.
+     * @param precoUnitario O preço unitário do produto.
      */
     public void setPrecoUnitario(BigDecimal precoUnitario) {
         this.precoUnitario = precoUnitario;
@@ -155,6 +157,7 @@ public class ItemVenda {
 
     /**
      * Obtém o subtotal do item (preço x quantidade).
+     * @return O subtotal do item.
      */
     public BigDecimal getSubtotal() {
         return subtotal;
@@ -162,6 +165,7 @@ public class ItemVenda {
 
     /**
      * Define o subtotal do item (preço x quantidade).
+     * @param subtotal O subtotal do item.
      */
     public void setSubtotal(BigDecimal subtotal) {
         this.subtotal = subtotal;
@@ -169,6 +173,7 @@ public class ItemVenda {
 
     /**
      * Obtém o total_item (compatível com coluna do banco).
+     * @return O total_item.
      */
     public BigDecimal getTotalItem() {
         return totalItem;
@@ -176,6 +181,7 @@ public class ItemVenda {
 
     /**
      * Define o total_item (compatível com coluna do banco).
+     * @param totalItem O total_item.
      */
     public void setTotalItem(BigDecimal totalItem) {
         this.totalItem = totalItem;

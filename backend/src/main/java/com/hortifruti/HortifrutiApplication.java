@@ -16,6 +16,11 @@ import org.springframework.context.annotation.ComponentScan;
 @ComponentScan(basePackages = {"com.hortifruti"})
 public class HortifrutiApplication {
 
+    /**
+     * Construtor padrão.
+     */
+    public HortifrutiApplication() {}
+
 
     /**
      * Método principal que inicia a aplicação Spring Boot.

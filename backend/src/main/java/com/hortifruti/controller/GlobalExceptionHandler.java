@@ -17,6 +17,11 @@ import java.util.Map;
 public class GlobalExceptionHandler {
 
     /**
+     * Construtor padrão.
+     */
+    public GlobalExceptionHandler() {}
+
+    /**
      * Manipula exceções do tipo IllegalArgumentException.
      * @param ex A exceção
      * @param request A requisição web

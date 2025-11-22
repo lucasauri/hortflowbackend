@@ -26,6 +26,7 @@ public class ClienteService {
     /**
      * Construtor para injeção de dependências.
      * @param clienteRepository Repositório de clientes
+     * @param enderecoRepository Repositório de endereços
      */
     @Autowired
     public ClienteService(ClienteRepository clienteRepository, EnderecoRepository enderecoRepository) {
@@ -84,6 +85,8 @@ public class ClienteService {
 
     /**
      * Cria um novo cliente e, opcionalmente, um endereço associado (principal).
+     * @param request A requisição contendo os dados do cliente e do endereço.
+     * @return Um ClienteEnderecoResponse contendo o cliente criado e o endereço (se houver).
      */
     public ClienteEnderecoResponse criarComEndereco(ClienteEnderecoRequest request) {
         if (request == null) {

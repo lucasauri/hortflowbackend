@@ -6,6 +6,11 @@ import jakarta.validation.constraints.NotBlank;
  * DTO para requisição de login.
  */
 public class LoginRequest {
+
+    /**
+     * Construtor padrão.
+     */
+    public LoginRequest() {}
     /**
      * O email do usuário.
      */
