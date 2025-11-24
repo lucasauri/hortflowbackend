@@ -1,40 +1,23 @@
-# ============================
-# Java / Maven
-# ============================
-
+# Build
 target/
 *.class
 *.jar
 *.war
 *.ear
 
-# Maven
-.mvn/
-!.mvn/wrapper/maven-wrapper.jar
-.mvn/wrapper/maven-wrapper.jar
-
 # Logs
 *.log
 *.log.*
 
 # IDEs
-# IntelliJ
 .idea/
 *.iml
 out/
-
-# Eclipse
+.vscode/
 .project
 .classpath
 .settings/
 bin/
-
-# VSCode
-.vscode/
-
-# Sistema Operacional
-.DS_Store
-Thumbs.db
 
 # Arquivos compactados grandes
 *.tar
@@ -50,6 +33,6 @@ Thumbs.db
 # Assinaturas
 *.sig
 
-# Não ignore estas pastas! (essenciais)
-# src/
-# pkg/
+# Maven
+.mvn/
+!.mvn/wrapper/maven-wrapper.jar
