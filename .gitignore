@@ -50,6 +50,4 @@ Thumbs.db
 # Assinaturas
 *.sig
 
-# Não ignore estas pastas! (essenciais)
-# src/
-# pkg/
+
