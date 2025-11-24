@@ -18,6 +18,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class SecurityConfig {
 
     /**
+     * Construtor padrão.
+     */
+    public SecurityConfig() {
+    }
+
+    /**
      * Configura a cadeia de filtros de segurança.
      * @param http A configuração de segurança HTTP.
      * @return A cadeia de filtros de segurança.

@@ -13,6 +13,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+/**
+ * Serviço para operações relacionadas a vendas.
+ */
 @Service
 public class VendaService {
     
@@ -31,6 +34,17 @@ public class VendaService {
     @Autowired
     private EnderecoRepository enderecoRepository;
     
+    /**
+     * Construtor padrão.
+     */
+    public VendaService() {
+    }
+
+    /**
+     * Cria uma nova venda.
+     * @param venda A venda a ser criada.
+     * @return A venda criada.
+     */
     @Transactional
     public Venda criarVenda(Venda venda) {
         // Validar cliente
@@ -111,6 +125,12 @@ public class VendaService {
         return vendaRepository.save(venda);
     }
     
+    /**
+     * Finaliza uma venda.
+     * @param vendaId O ID da venda.
+     * @param formaPagamento A forma de pagamento.
+     * @return A venda finalizada.
+     */
     @Transactional
     public Venda finalizarVenda(Long vendaId, String formaPagamento) {
         Venda venda = vendaRepository.findById(vendaId)
@@ -126,6 +146,12 @@ public class VendaService {
         return vendaRepository.save(venda);
     }
 
+    /**
+     * Finaliza uma venda pelo número.
+     * @param numeroVenda O número da venda.
+     * @param formaPagamento A forma de pagamento.
+     * @return A venda finalizada.
+     */
     @Transactional
     public Venda finalizarVendaPorNumero(String numeroVenda, String formaPagamento) {
         Venda venda = vendaRepository.findByNumeroVenda(numeroVenda)
@@ -141,6 +167,11 @@ public class VendaService {
         return vendaRepository.save(venda);
     }
     
+    /**
+     * Cancela uma venda.
+     * @param vendaId O ID da venda.
+     * @return A venda cancelada.
+     */
     @Transactional
     public Venda cancelarVenda(Long vendaId) {
         Venda venda = vendaRepository.findById(vendaId)
@@ -169,22 +200,46 @@ public class VendaService {
         return vendaRepository.save(venda);
     }
     
+    /**
+     * Lista todas as vendas.
+     * @return Uma lista de todas as vendas.
+     */
     public List<Venda> listarTodas() {
         return vendaRepository.findAllOrderByDataVendaDesc();
     }
     
+    /**
+     * Lista as vendas por cliente.
+     * @param clienteId O ID do cliente.
+     * @return Uma lista de vendas do cliente.
+     */
     public List<Venda> listarPorCliente(Long clienteId) {
         return vendaRepository.findByClienteIdOrderByDataVendaDesc(clienteId);
     }
     
+    /**
+     * Lista as vendas por status.
+     * @param status O status da venda.
+     * @return Uma lista de vendas com o status especificado.
+     */
     public List<Venda> listarPorStatus(Venda.StatusVenda status) {
         return vendaRepository.findByStatusOrderByDataVendaDesc(status);
     }
     
+    /**
+     * Busca uma venda por ID.
+     * @param id O ID da venda.
+     * @return Uma Optional contendo a venda, se encontrada.
+     */
     public Optional<Venda> buscarPorId(Long id) {
         return vendaRepository.findById(id);
     }
     
+    /**
+     * Busca uma venda por número.
+     * @param numeroVenda O número da venda.
+     * @return Uma Optional contendo a venda, se encontrada.
+     */
     public Optional<Venda> buscarPorNumero(String numeroVenda) {
         return vendaRepository.findByNumeroVenda(numeroVenda);
     }

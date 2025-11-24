@@ -8,6 +8,12 @@ import jakarta.validation.constraints.NotNull;
  */
 public class MovimentacaoRequest {
 
+    /**
+     * Construtor padrão.
+     */
+    public MovimentacaoRequest() {
+    }
+
     @NotBlank(message = "O tipo de movimentação é obrigatório")
     private String tipo;
 

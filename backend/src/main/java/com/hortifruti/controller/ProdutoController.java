@@ -32,6 +32,10 @@ public class ProdutoController {
 
     private final ProdutoService produtoService;
 
+    /**
+     * Construtor para injeção de dependências.
+     * @param produtoService O serviço de produtos.
+     */
     @Autowired
     public ProdutoController(ProdutoService produtoService) {
         this.produtoService = produtoService;

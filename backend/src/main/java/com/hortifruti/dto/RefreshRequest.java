@@ -6,6 +6,11 @@ import jakarta.validation.constraints.NotBlank;
  * Data Transfer Object para requisição de atualização de token.
  */
 public class RefreshRequest {
+    /**
+     * Construtor padrão.
+     */
+    public RefreshRequest() {
+    }
     @NotBlank
     private String refreshToken;
 

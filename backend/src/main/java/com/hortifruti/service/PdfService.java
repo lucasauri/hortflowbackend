@@ -24,6 +24,12 @@ import java.time.format.DateTimeFormatter;
 public class PdfService {
 
     /**
+     * Construtor padrão.
+     */
+    public PdfService() {
+    }
+
+    /**
      * Gera um PDF de recibo de venda.
      * @param venda A venda para a qual o recibo será gerado.
      * @return Um ByteArrayInputStream contendo o PDF gerado.

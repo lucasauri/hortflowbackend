@@ -25,6 +25,12 @@ import java.util.List;
 public class SwaggerConfig {
 
     /**
+     * Construtor padrão.
+     */
+    public SwaggerConfig() {
+    }
+
+    /**
      * Configura a documentação OpenAPI/Swagger da aplicação.
      * 
      * <p>Define informações gerais da API, como título, versão, descrição e contato.

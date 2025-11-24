@@ -33,7 +33,7 @@ import java.util.Optional;
 @CrossOrigin(origins = "*")
 @Tag(name = "Vendas", description = "API para gerenciamento de vendas")
 public class VendaController {
-    
+
     @Autowired
     private VendaService vendaService;
 
@@ -43,6 +43,12 @@ public class VendaController {
     @Autowired
     private VendaRepository vendaRepository;
     
+    /**
+     * Construtor padrão.
+     */
+    public VendaController() {
+    }
+
     /**
      * Cria uma nova venda.
      * 
@@ -64,6 +70,12 @@ public class VendaController {
         }
     }
     
+    /**
+     * Finaliza uma venda.
+     * @param id O ID da venda.
+     * @param formaPagamento A forma de pagamento.
+     * @return A venda finalizada.
+     */
     @PutMapping("/{id}/finalizar")
     public ResponseEntity<?> finalizarVenda(@PathVariable Long id, @RequestParam(required = false) String formaPagamento) {
         try {
@@ -81,6 +93,12 @@ public class VendaController {
         }
     }
 
+    /**
+     * Finaliza uma venda por número.
+     * @param numero O número da venda.
+     * @param formaPagamento A forma de pagamento.
+     * @return A venda finalizada.
+     */
     @PutMapping("/numero/{numero}/finalizar")
     public ResponseEntity<?> finalizarVendaPorNumero(@PathVariable String numero, @RequestParam(required = false) String formaPagamento) {
         try {
@@ -100,6 +118,9 @@ public class VendaController {
 
     /**
      * Finaliza a venda e retorna o PDF do recibo.
+     * @param id O ID da venda.
+     * @param formaPagamento A forma de pagamento.
+     * @return O PDF do recibo.
      */
     @Operation(summary = "Finalizar venda e gerar PDF", description = "Finaliza a venda e retorna o PDF do recibo em linha.")
     @PutMapping("/{id}/finalizar/pdf")
@@ -131,6 +152,11 @@ public class VendaController {
         }
     }
     
+    /**
+     * Cancela uma venda.
+     * @param id O ID da venda.
+     * @return A venda cancelada.
+     */
     @PutMapping("/{id}/cancelar")
     public ResponseEntity<?> cancelarVenda(@PathVariable Long id) {
         try {
@@ -145,18 +171,32 @@ public class VendaController {
         }
     }
     
+    /**
+     * Lista todas as vendas.
+     * @return Uma lista de todas as vendas.
+     */
     @GetMapping
     public ResponseEntity<List<Venda>> listarTodas() {
         List<Venda> vendas = vendaService.listarTodas();
         return ResponseEntity.ok(vendas);
     }
     
+    /**
+     * Lista as vendas de um cliente.
+     * @param clienteId O ID do cliente.
+     * @return Uma lista de vendas do cliente.
+     */
     @GetMapping("/cliente/{clienteId}")
     public ResponseEntity<List<Venda>> listarPorCliente(@PathVariable Long clienteId) {
         List<Venda> vendas = vendaService.listarPorCliente(clienteId);
         return ResponseEntity.ok(vendas);
     }
     
+    /**
+     * Lista as vendas por status.
+     * @param status O status da venda.
+     * @return Uma lista de vendas com o status especificado.
+     */
     @GetMapping("/status/{status}")
     public ResponseEntity<List<Venda>> listarPorStatus(@PathVariable String status) {
         try {
@@ -169,6 +209,11 @@ public class VendaController {
         }
     }
     
+    /**
+     * Busca uma venda por ID.
+     * @param id O ID da venda.
+     * @return A venda, se encontrada.
+     */
     @GetMapping("/{id}")
     public ResponseEntity<?> buscarPorId(@PathVariable Long id) {
         Optional<Venda> venda = vendaService.buscarPorId(id);
@@ -180,6 +225,11 @@ public class VendaController {
         }
     }
     
+    /**
+     * Busca uma venda pelo número.
+     * @param numeroVenda O número da venda.
+     * @return A venda, se encontrada.
+     */
     @GetMapping("/numero/{numeroVenda}")
     public ResponseEntity<?> buscarPorNumero(@PathVariable String numeroVenda) {
         Optional<Venda> venda = vendaService.buscarPorNumero(numeroVenda);
@@ -191,23 +241,42 @@ public class VendaController {
         }
     }
     
-    // Classe interna para respostas de erro
+    /**
+     * Classe interna para respostas de erro.
+     */
     public static class ErrorResponse {
         private String message;
         
+        /**
+         * Construtor da classe de resposta de erro.
+         * @param message A mensagem de erro.
+         */
         public ErrorResponse(String message) {
             this.message = message;
         }
         
+        /**
+         * Retorna a mensagem de erro.
+         * @return A mensagem de erro.
+         */
         public String getMessage() {
             return message;
         }
         
+        /**
+         * Define a mensagem de erro.
+         * @param message A mensagem de erro.
+         */
         public void setMessage(String message) {
             this.message = message;
         }
     }
 
+    /**
+     * Gera o PDF de uma venda.
+     * @param id O ID da venda.
+     * @return O PDF da venda.
+     */
     @GetMapping("/{id}/pdf")
     public ResponseEntity<?> gerarPdfVenda(@PathVariable Long id) {
         try {

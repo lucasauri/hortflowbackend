@@ -53,6 +53,8 @@ public class GlobalExceptionHandler {
 
     /**
      * Manipula falta de parâmetros obrigatórios na requisição (ex.: formaPagamento).
+     * @param ex A exceção MissingServletRequestParameterException.
+     * @return Uma resposta com status 400 (Bad Request) e uma mensagem de erro.
      */
     @ExceptionHandler(MissingServletRequestParameterException.class)
     public ResponseEntity<Object> handleMissingParam(MissingServletRequestParameterException ex) {
